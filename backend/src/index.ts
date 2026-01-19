@@ -1,0 +1,113 @@
+// Load env vars FIRST before any other imports
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import cors from 'cors';
+import connectDB from './config/database';
+import { errorHandler, notFoundHandler } from './shared/errors/errorHandler';
+
+// Routes
+import authRoutes from './routes/authRoutes';
+import bookingRoutes from './routes/bookingRoutes';
+import driverRoutes from './routes/driverRoutes';
+import carWashRoutes from './routes/carWashRoutes';
+import adminRoutes from './routes/adminRoutes';
+import vehicleRoutes from './routes/vehicleRoutes';
+import paymentRoutes from './routes/paymentRoutes';
+import chatRoutes from './routes/chatRoutes';
+import queueRoutes from './routes/queueRoutes';
+import recommendationRoutes from './routes/recommendationRoutes';
+import locationRoutes from './routes/locationRoutes';
+import notificationRoutes from './routes/notificationRoutes';
+
+// Connect to database
+connectDB().then(async () => {
+  // Auto-create tables if they don't exist (only if DATABASE_URL is set)
+  const { initDatabase } = await import('./migrations/init-database');
+  await initDatabase();
+}).catch((error) => {
+  console.error('Database setup error:', error);
+});
+
+const app = express();
+
+// Security middleware
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174',
+    process.env.FRONTEND_URL || ''
+  ].filter(Boolean),
+  credentials: true,
+}));
+
+// Body parsing middleware
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Request logging middleware (development only)
+if (process.env.NODE_ENV === 'development') {
+  app.use((req, _res, next) => {
+    console.log(`${req.method} ${req.path}`, {
+      query: req.query,
+      body: req.method !== 'GET' ? req.body : undefined,
+    });
+    next();
+  });
+}
+
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/drivers', driverRoutes);
+app.use('/api/carwash', carWashRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/queue', queueRoutes);
+app.use('/api/recommendations', recommendationRoutes);
+app.use('/api/location', locationRoutes);
+app.use('/api/notifications', notificationRoutes);
+
+// Health check
+app.get('/api/health', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'SuCAR API is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+  });
+});
+
+// 404 handler (must be before error handler)
+app.use(notFoundHandler);
+
+// Global error handler (must be last)
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(PORT, () => {
+  console.log(`🚀 SuCAR API Server`);
+  console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`   Port: ${PORT}`);
+  console.log(`   Health: http://localhost:${PORT}/api/health`);
+}).on('error', (error: NodeJS.ErrnoException) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`\n❌ Port ${PORT} is already in use!`);
+    console.error('\n💡 To fix this:');
+    console.error(`   1. Kill the process using port ${PORT}:`);
+    console.error(`      Windows: netstat -ano | findstr :${PORT}`);
+    console.error(`      Then: taskkill /F /PID <process_id>`);
+    console.error(`   2. Or use the helper script: .\\kill-port.ps1`);
+    console.error(`   3. Or change the port in .env: PORT=5001\n`);
+    process.exit(1);
+  } else {
+    console.error('❌ Server error:', error);
+    process.exit(1);
+  }
+});

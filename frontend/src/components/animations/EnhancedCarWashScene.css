@@ -1,0 +1,217 @@
+/* ============================================
+   Enhanced Car Wash Scene
+   Multiple Stations with Continuous Loop
+   ============================================ */
+
+.enhanced-car-wash-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Car Wash Stations */
+.car-wash-station {
+  position: absolute;
+  bottom: 8%;
+  left: var(--station-left, 20%);
+  transform: translateX(-50%);
+  width: 180px;
+  height: 140px;
+  z-index: 2;
+  animation: stationPulse 4s ease-in-out infinite;
+  animation-delay: var(--station-delay, 0s);
+}
+
+.station-roof {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.station-pillars {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 95px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 25px;
+}
+
+.pillar {
+  width: 22px;
+  height: 70px;
+  background: var(--color-gray-300);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-gray-400);
+}
+
+.station-sign {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  animation: signGlow 3s ease-in-out infinite;
+}
+
+@keyframes stationPulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.02);
+  }
+}
+
+@keyframes signGlow {
+  0%, 100% {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 2px 12px rgba(59, 130, 246, 0.6));
+  }
+}
+
+[data-theme='dark'] .station-roof {
+  background: linear-gradient(135deg, var(--color-primary-700), var(--color-primary-900));
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .pillar {
+  background: var(--color-gray-600);
+  border-color: var(--color-gray-500);
+}
+
+/* Washing Area - Inside Station */
+.washing-area {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 50px;
+  z-index: 1;
+}
+
+.washing-area .car-animation {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Queue Area - Cars Waiting */
+.queue-area {
+  position: absolute;
+  bottom: 20px;
+  left: -80px;
+  width: 70px;
+  height: 40px;
+  z-index: 1;
+}
+
+.queue-area .car-animation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Cars Arriving Lane */
+.cars-arriving-lane {
+  position: absolute;
+  bottom: 18%;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1;
+}
+
+/* Cars Leaving Lane */
+.cars-leaving-lane {
+  position: absolute;
+  bottom: 12%;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1;
+}
+
+/* Background Traffic */
+.background-traffic {
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .car-wash-station {
+    width: 150px;
+    height: 120px;
+  }
+  
+  .station-sign {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .car-wash-station {
+    width: 120px;
+    height: 100px;
+  }
+  
+  .station-sign {
+    font-size: 1.5rem;
+  }
+  
+  .washing-area {
+    width: 100px;
+    height: 40px;
+  }
+  
+  .queue-area {
+    display: none; /* Hide queue on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .enhanced-car-wash-scene {
+    display: none; /* Hide on very small screens */
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-car-wash-scene {
+    display: none;
+  }
+  
+  .car-wash-station {
+    animation: none;
+  }
+  
+  .station-sign {
+    animation: none;
+  }
+}

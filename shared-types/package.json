@@ -1,0 +1,17 @@
+{
+  "name": "@sucar/shared-types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types for SuCAR/SUKA Car Wash System",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": ["sucar", "suka", "car-wash", "types"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.2"
+  }
+}

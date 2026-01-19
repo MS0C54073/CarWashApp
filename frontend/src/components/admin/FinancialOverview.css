@@ -1,0 +1,76 @@
+.financial-overview {
+  width: 100%;
+}
+
+.revenue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.revenue-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.revenue-card.total {
+  border-left: 4px solid var(--color-emerald-500);
+}
+
+.revenue-card.pending {
+  border-left: 4px solid var(--color-amber-500);
+}
+
+.revenue-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  font-weight: var(--font-medium);
+}
+
+.revenue-value {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+.revenue-card.total .revenue-value {
+  color: var(--color-emerald-600);
+}
+
+.revenue-card.pending .revenue-value {
+  color: var(--color-amber-600);
+}
+
+.metric-value.success {
+  color: var(--color-green-600);
+}
+
+.metric-value.warning {
+  color: var(--color-amber-600);
+}
+
+.metric-value.error {
+  color: var(--color-red-600);
+}
+
+.revenue-cell {
+  font-weight: var(--font-semibold);
+  color: var(--color-emerald-600);
+}
+
+.financial-section {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.financial-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

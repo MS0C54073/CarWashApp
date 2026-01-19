@@ -1,0 +1,148 @@
+/* ============================================
+   Car Wash Scene Component
+   Background Animation Scene
+   ============================================ */
+
+.car-wash-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Car Wash Station */
+.car-wash-station {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 120px;
+  z-index: 2;
+}
+
+.station-roof {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.station-pillars {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 20px;
+}
+
+.pillar {
+  width: 20px;
+  height: 60px;
+  background: var(--color-gray-300);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.station-sign {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+[data-theme='dark'] .station-roof {
+  background: linear-gradient(135deg, var(--color-primary-700), var(--color-primary-900));
+}
+
+[data-theme='dark'] .pillar {
+  background: var(--color-gray-600);
+}
+
+/* Cars in Wash */
+.cars-in-wash {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 60px;
+  z-index: 1;
+}
+
+.cars-in-wash .car-animation {
+  position: absolute;
+  bottom: 0;
+}
+
+.cars-in-wash .car-animation:nth-child(1) {
+  left: 10px;
+}
+
+.cars-in-wash .car-animation:nth-child(2) {
+  right: 10px;
+}
+
+/* Cars Arriving */
+.cars-arriving {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  height: 100px;
+  z-index: 1;
+}
+
+/* Cars Leaving */
+.cars-leaving {
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  right: 0;
+  height: 100px;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .car-wash-station {
+    width: 150px;
+    height: 90px;
+  }
+  
+  .station-sign {
+    font-size: 1.5rem;
+  }
+  
+  .cars-in-wash {
+    width: 120px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-wash-scene {
+    display: none; /* Hide on very small screens */
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .car-wash-scene {
+    display: none;
+  }
+}

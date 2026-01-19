@@ -1,0 +1,239 @@
+.route-optimizer {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.route-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.route-header h3 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.route-controls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.route-select {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.route-select:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.route-empty {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-secondary);
+}
+
+.route-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.route-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.route-summary {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.summary-label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.summary-value {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+.route-stops {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.route-stop {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.route-stop:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-secondary);
+}
+
+.stop-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary-600);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-bold);
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+}
+
+.stop-content {
+  flex: 1;
+}
+
+.stop-title {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.stop-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.stop-details p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.stop-details strong {
+  color: var(--text-primary);
+  margin-right: var(--space-1);
+}
+
+.stop-status {
+  display: flex;
+  align-items: flex-start;
+}
+
+.stop-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-lg);
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-primary);
+}
+
+.type-badge.type-pickup {
+  background: var(--color-blue-50);
+  border-color: var(--color-blue-500);
+}
+
+.type-badge.type-wash {
+  background: var(--color-purple-50);
+  border-color: var(--color-purple-500);
+}
+
+.type-badge.type-dropoff {
+  background: var(--color-green-50);
+  border-color: var(--color-green-500);
+}
+
+[data-theme='dark'] .type-badge.type-pickup {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: var(--color-blue-400);
+}
+
+[data-theme='dark'] .type-badge.type-wash {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--color-purple-400);
+}
+
+[data-theme='dark'] .type-badge.type-dropoff {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--color-green-400);
+}
+
+.route-map {
+  min-height: 500px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+  .route-content {
+    grid-template-columns: 1fr;
+  }
+
+  .route-map {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .route-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .route-summary {
+    flex-direction: column;
+  }
+
+  .route-stops {
+    max-height: 300px;
+  }
+}

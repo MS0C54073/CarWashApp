@@ -1,0 +1,38 @@
+/* ============================================
+   Background Cars Component
+   Subtle Looping Background Animation
+   ============================================ */
+
+.background-cars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4; /* Subtle so it doesn't distract */
+}
+
+.background-car-track {
+  position: absolute;
+  bottom: var(--track-bottom, 20%);
+  left: 0;
+  right: 0;
+  height: 50px;
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .background-cars {
+    display: none;
+  }
+}
+
+/* Hide on very small screens for performance */
+@media (max-width: 480px) {
+  .background-cars {
+    display: none;
+  }
+}

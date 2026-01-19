@@ -1,0 +1,231 @@
+/* ============================================
+   Car Queue System
+   Dynamic Queue with Continuous Loop
+   ============================================ */
+
+.car-queue-system {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 5%;
+}
+
+.queue-station {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+/* Station Structure */
+.queue-station-structure {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 140px;
+}
+
+.queue-station-roof {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  animation: roofPulse 4s ease-in-out infinite;
+}
+
+.queue-station-pillars {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 95px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 25px;
+}
+
+.queue-pillar {
+  width: 22px;
+  height: 70px;
+  background: var(--color-gray-300);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-gray-400);
+}
+
+.queue-station-sign {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  animation: signPulse 3s ease-in-out infinite;
+}
+
+@keyframes roofPulse {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.05);
+  }
+}
+
+@keyframes signPulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+    filter: drop-shadow(0 2px 12px rgba(59, 130, 246, 0.6));
+  }
+}
+
+/* Washing Area */
+.queue-washing-area {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 50px;
+  z-index: 3;
+}
+
+.queue-washing-area .car-animation {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Queue Waiting Area */
+.queue-waiting-area {
+  position: absolute;
+  bottom: 25px;
+  left: -100px;
+  width: 90px;
+  height: 120px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.queue-car-slot {
+  position: relative;
+  width: 70px;
+  height: 35px;
+  animation: queueMove 2s ease-in-out infinite;
+  animation-delay: calc(var(--queue-index, 0) * 0.5s);
+}
+
+@keyframes queueMove {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* Arriving Area */
+.queue-arriving-area {
+  position: absolute;
+  bottom: 18%;
+  left: -150px;
+  width: 200px;
+  height: 50px;
+  z-index: 1;
+}
+
+/* Leaving Area */
+.queue-leaving-area {
+  position: absolute;
+  bottom: 12%;
+  right: -150px;
+  width: 200px;
+  height: 50px;
+  z-index: 1;
+}
+
+[data-theme='dark'] .queue-station-roof {
+  background: linear-gradient(135deg, var(--color-primary-700), var(--color-primary-900));
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme='dark'] .queue-pillar {
+  background: var(--color-gray-600);
+  border-color: var(--color-gray-500);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .queue-station {
+    width: 160px;
+    height: 180px;
+  }
+  
+  .queue-station-structure {
+    width: 150px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .car-queue-system {
+    padding: 0 2%;
+  }
+  
+  .queue-station {
+    width: 120px;
+    height: 150px;
+  }
+  
+  .queue-station-structure {
+    width: 120px;
+    height: 100px;
+  }
+  
+  .queue-waiting-area {
+    display: none; /* Hide queue on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .car-queue-system {
+    display: none; /* Hide on very small screens */
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .car-queue-system {
+    display: none;
+  }
+  
+  .queue-station-roof,
+  .queue-station-sign {
+    animation: none;
+  }
+}

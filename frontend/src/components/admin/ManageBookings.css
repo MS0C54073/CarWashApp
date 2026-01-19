@@ -1,0 +1,74 @@
+.manage-bookings {
+  width: 100%;
+}
+
+.manage-bookings .admin-card-header {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.manage-bookings .header-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.manage-bookings .card-subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-normal);
+}
+
+.driver-assigned {
+  color: var(--color-success);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+}
+
+.driver-unassigned {
+  color: var(--color-warning);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+}
+
+.amount-cell {
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.assign-driver-controls {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.driver-select {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  min-width: 150px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.driver-select:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+@media (max-width: 768px) {
+  .assign-driver-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .driver-select {
+    width: 100%;
+  }
+}

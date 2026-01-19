@@ -1,0 +1,144 @@
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { lazy, Suspense } from 'react';
+import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { ToastProvider } from './components/ToastContainer';
+import ErrorBoundary from './components/ErrorBoundary';
+import ThemeToggle from './components/ThemeToggle';
+import LandingPage from './pages/LandingPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ProtectedRoute from './components/ProtectedRoute';
+import DashboardSkeleton from './components/skeletons/DashboardSkeleton';
+
+// Lazy load dashboard components for better initial load performance
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const CarWashDashboard = lazy(() => import('./pages/CarWashDashboard'));
+const ClientHome = lazy(() => import('./pages/ClientHome'));
+const DriverHome = lazy(() => import('./pages/DriverHome'));
+const BookService = lazy(() => import('./pages/BookService'));
+const AddVehicle = lazy(() => import('./pages/AddVehicle'));
+const Payment = lazy(() => import('./pages/Payment'));
+const Profile = lazy(() => import('./pages/Profile'));
+
+
+// Optimized React Query configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30000, // Consider data fresh for 30 seconds
+      gcTime: 5 * 60 * 1000, // Keep unused data in cache for 5 minutes
+      refetchOnWindowFocus: false, // Don't refetch on window focus
+      refetchOnMount: false, // Use cached data if available
+      retry: 1, // Only retry once on failure
+      retryDelay: 1000, // Wait 1 second before retry
+    },
+  },
+});
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <Router>
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route
+                    path="/admin/*"
+                    element={
+                      <ProtectedRoute role="admin">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <AdminDashboard />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/carwash/*"
+                    element={
+                      <ProtectedRoute role="carwash">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <CarWashDashboard />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/client"
+                    element={
+                      <ProtectedRoute role="client">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <ClientHome />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/client/book"
+                    element={
+                      <ProtectedRoute role="client">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <BookService />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/client/vehicles/add"
+                    element={
+                      <ProtectedRoute role="client">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <AddVehicle />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/client/payment/:bookingId"
+                    element={
+                      <ProtectedRoute role="client">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <Payment />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/driver"
+                    element={
+                      <ProtectedRoute role="driver">
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <DriverHome />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <Suspense fallback={<DashboardSkeleton />}>
+                          <Profile />
+                        </Suspense>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/" element={<Navigate to="/login" replace />} />
+                </Routes>
+              </Router>
+              <ThemeToggle />
+            </AuthProvider>
+          </ToastProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  );
+}
+
+export default App;

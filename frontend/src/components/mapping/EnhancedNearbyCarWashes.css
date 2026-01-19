@@ -1,0 +1,764 @@
+.enhanced-nearby-carwashes {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--bg-color, #fff);
+  border-radius: 12px;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.enhanced-header {
+  margin-bottom: 20px;
+}
+
+.enhanced-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.enhanced-subtitle {
+  margin: 0;
+  color: var(--text-secondary, #666);
+  font-size: 0.9rem;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 24px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #3b82f6);
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Autocomplete */
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-color, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.autocomplete-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid var(--border-color, #f0f0f0);
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover {
+  background-color: var(--hover-bg, #f5f5f5);
+}
+
+.autocomplete-icon {
+  font-size: 1.5rem;
+  margin-right: 12px;
+}
+
+.autocomplete-content {
+  flex: 1;
+}
+
+.autocomplete-name {
+  font-weight: 500;
+  color: var(--text-color, #1a1a1a);
+  margin-bottom: 4px;
+}
+
+.autocomplete-location {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #666);
+}
+
+/* Location Picker */
+.location-picker-section {
+  margin-top: 16px;
+}
+
+.location-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-color, #1a1a1a);
+  font-size: 0.9rem;
+}
+
+.location-error {
+  margin-top: 8px;
+  color: var(--error-color, #dc2626);
+  font-size: 0.85rem;
+}
+
+/* Results */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.results-count {
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.results-sort {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #666);
+}
+
+.carwashes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.carwash-card {
+  background: var(--card-bg, #f9fafb);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  padding: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.carwash-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carwash-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.carwash-icon {
+  font-size: 2rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary, #f5f5f5);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.carwash-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-secondary, #f5f5f5);
+  border: 2px solid var(--border-color, #e0e0e0);
+}
+
+.carwash-picture-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carwash-info {
+  flex: 1;
+}
+
+.carwash-name {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.carwash-location {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+}
+
+.carwash-distance {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--primary-color, #3b82f6);
+  font-weight: 500;
+}
+
+/* Services */
+.carwash-services {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.services-header {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-color, #1a1a1a);
+  font-size: 0.9rem;
+}
+
+.service-item {
+  background: var(--bg-color, #fff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.service-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.service-name {
+  font-weight: 500;
+  color: var(--text-color, #1a1a1a);
+}
+
+.service-price {
+  font-weight: 600;
+  color: var(--primary-color, #3b82f6);
+}
+
+.service-total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color, #f0f0f0);
+}
+
+.total-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #666);
+}
+
+.total-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--success-color, #10b981);
+}
+
+.distance-fee {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #666);
+}
+
+.book-now-btn,
+.view-all-services-btn,
+.view-details-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.book-now-btn {
+  background: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+.book-now-btn:hover {
+  background: var(--primary-hover, #2563eb);
+  transform: translateY(-1px);
+}
+
+.view-all-services-btn,
+.view-details-btn {
+  background: transparent;
+  color: var(--primary-color, #3b82f6);
+  border: 1px solid var(--primary-color, #3b82f6);
+}
+
+.view-all-services-btn:hover,
+.view-details-btn:hover {
+  background: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+/* No Results */
+.no-location-message,
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary, #666);
+}
+
+.no-results-hint {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* Booking Modal */
+.booking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.booking-modal {
+  background: var(--bg-color, #fff);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-secondary, #666);
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: var(--hover-bg, #f5f5f5);
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-section {
+  margin-bottom: 24px;
+}
+
+.modal-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.modal-carwash-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+  margin: 8px 0;
+}
+
+.modal-distance {
+  color: var(--text-secondary, #666);
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* Service Selection */
+.services-select {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.service-option {
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.service-option:hover {
+  border-color: var(--primary-color, #3b82f6);
+  background: var(--hover-bg, #f5f5f5);
+}
+
+.service-option.selected {
+  border-color: var(--primary-color, #3b82f6);
+  background: var(--primary-light, #eff6ff);
+}
+
+.service-option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.service-option-name {
+  font-weight: 600;
+  color: var(--text-color, #1a1a1a);
+}
+
+.service-option-price {
+  font-weight: 600;
+  color: var(--primary-color, #3b82f6);
+}
+
+.service-option-desc {
+  margin: 8px 0;
+  color: var(--text-secondary, #666);
+  font-size: 0.9rem;
+}
+
+.service-option-total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.service-option-total > span:first-child {
+  font-weight: 600;
+  color: var(--success-color, #10b981);
+}
+
+.service-option-fee {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #666);
+}
+
+/* Vehicle Selection */
+.vehicles-select {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vehicle-option {
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vehicle-option:hover {
+  border-color: var(--primary-color, #3b82f6);
+  background: var(--hover-bg, #f5f5f5);
+}
+
+.vehicle-option.selected {
+  border-color: var(--primary-color, #3b82f6);
+  background: var(--primary-light, #eff6ff);
+}
+
+.vehicle-option-name {
+  font-weight: 500;
+  color: var(--text-color, #1a1a1a);
+}
+
+.vehicle-option-plate {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+  background: var(--card-bg, #f9fafb);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.no-vehicles {
+  text-align: center;
+  padding: 20px;
+}
+
+.add-vehicle-btn {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: var(--primary-color, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Booking Summary */
+.booking-summary {
+  background: var(--card-bg, #f9fafb);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row.total-row {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 2px solid var(--border-color, #e0e0e0);
+  font-weight: 600;
+}
+
+.total-amount {
+  font-size: 1.2rem;
+  color: var(--success-color, #10b981);
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.modal-cancel-btn,
+.modal-confirm-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modal-cancel-btn {
+  background: var(--card-bg, #f9fafb);
+  color: var(--text-color, #1a1a1a);
+}
+
+.modal-cancel-btn:hover {
+  background: var(--hover-bg, #f5f5f5);
+}
+
+.modal-confirm-btn {
+  background: var(--primary-color, #3b82f6);
+  color: white;
+}
+
+.modal-confirm-btn:hover:not(:disabled) {
+  background: var(--primary-hover, #2563eb);
+  transform: translateY(-1px);
+}
+
+.modal-confirm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Pending Booking Prompt */
+.pending-booking-prompt {
+  position: sticky;
+  bottom: 0;
+  background: var(--bg-color, #fff);
+  border-top: 2px solid var(--primary-color, #3b82f6);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  z-index: 100;
+}
+
+.pending-booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--primary-color, #3b82f6);
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.pending-booking-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.close-pending-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.2s;
+}
+
+.close-pending-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.pending-booking-content {
+  padding: 20px;
+}
+
+.pending-booking-info {
+  margin-bottom: 20px;
+}
+
+.pending-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.pending-info-row:last-child {
+  border-bottom: none;
+}
+
+.pending-info-row.total-pending-row {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 2px solid var(--border-color, #e0e0e0);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.pending-label {
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.pending-value {
+  color: var(--text-color, #1a1a1a);
+  font-weight: 500;
+}
+
+.pending-total-price {
+  color: var(--success-color, #10b981);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.pending-booking-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.reject-booking-btn,
+.accept-booking-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reject-booking-btn {
+  background: var(--card-bg, #f9fafb);
+  color: var(--text-color, #1a1a1a);
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.reject-booking-btn:hover {
+  background: var(--hover-bg, #f5f5f5);
+}
+
+.accept-booking-btn {
+  background: var(--success-color, #10b981);
+  color: white;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.accept-booking-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}

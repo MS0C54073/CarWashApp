@@ -1,0 +1,125 @@
+.manage-carwashes {
+  width: 100%;
+}
+
+.manage-carwashes .admin-card-header {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.manage-carwashes .header-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.manage-carwashes .card-subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-normal);
+}
+
+.manage-carwashes .filters-bar {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.manage-carwashes .search-box {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.manage-carwashes .search-icon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--text-tertiary);
+  font-size: var(--text-base);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.manage-carwashes .search-input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3) var(--space-2) calc(var(--space-3) * 2 + 1.2em);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  transition: all var(--transition-base);
+}
+
+.manage-carwashes .search-input:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+.manage-carwashes .search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.manage-carwashes .admin-card-header {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+}
+
+.manage-carwashes .search-box {
+  width: 100%;
+  max-width: 400px;
+}
+
+.status-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: capitalize;
+}
+
+.status-active {
+  background: var(--color-green-100);
+  color: var(--color-green-700);
+}
+
+.status-inactive {
+  background: var(--color-red-100);
+  color: var(--color-red-700);
+}
+
+.status-pending {
+  background: var(--color-amber-100);
+  color: var(--color-amber-700);
+}
+
+[data-theme='dark'] .status-pending {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--color-amber-400);
+}
+
+.status-rejected {
+  background: var(--color-red-100);
+  color: var(--color-red-700);
+}
+
+[data-theme='dark'] .status-rejected {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--color-red-400);
+}

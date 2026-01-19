@@ -1,0 +1,114 @@
+.system-logs-container {
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.logs-table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.logs-table th {
+    text-align: left;
+    padding: 12px;
+    background: #f8f9fa;
+    color: #666;
+    border-bottom: 2px solid #eee;
+}
+
+.logs-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.log-user {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 500;
+}
+
+.user-role-badge {
+    font-size: 10px;
+    background: #eee;
+    padding: 1px 4px;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+.action-tag {
+    font-family: monospace;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.severity-badge {
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.severity-badge.info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.severity-badge.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.severity-badge.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.severity-badge.critical {
+    background: #dc3545;
+    color: white;
+}
+
+.log-details {
+    margin: 0;
+    max-width: 200px;
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 11px;
+    background: #f8f9fa;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.log-details:hover {
+    max-height: 300px;
+    white-space: pre-wrap;
+    overflow: visible;
+    position: absolute;
+    background: white;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.empty-logs {
+    text-align: center;
+    color: #888;
+    padding: 40px !important;
+}

@@ -1,0 +1,156 @@
+/* ============================================
+   Floating Elements Animation
+   Subtle floating animations for sections
+   ============================================ */
+
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+.floating-element {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Bubbles Animation */
+.floating-bubbles-element {
+  width: var(--element-size, 30px);
+  height: var(--element-size, 30px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0.2));
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  left: var(--left-position, 50%);
+  bottom: -50px;
+  animation: floatUp var(--animation-speed, 6s) ease-in-out infinite;
+  animation-delay: var(--animation-delay, 0s);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Sparkles Animation */
+.floating-sparkles-element {
+  width: var(--element-size, 20px);
+  height: var(--element-size, 20px);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+  left: var(--left-position, 50%);
+  top: -50px;
+  animation: sparkleDown var(--animation-speed, 6s) ease-in-out infinite;
+  animation-delay: var(--animation-delay, 0s);
+}
+
+@keyframes sparkleDown {
+  0% {
+    transform: translateY(0) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) scale(1.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Cars Floating (small icons) */
+.floating-cars-element {
+  width: var(--element-size, 40px);
+  height: calc(var(--element-size, 40px) / 2);
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+  border-radius: 4px;
+  left: var(--left-position, 50%);
+  bottom: -50px;
+  animation: floatCar var(--animation-speed, 8s) ease-in-out infinite;
+  animation-delay: var(--animation-delay, 0s);
+  position: relative;
+}
+
+.floating-cars-element::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.floating-cars-element::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+@keyframes floatCar {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50vh) translateX(20px) rotate(5deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(-20px) rotate(-5deg);
+    opacity: 0;
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .floating-elements {
+    display: none;
+  }
+  
+  .floating-element {
+    animation: none !important;
+  }
+}
+
+/* Hide on very small screens */
+@media (max-width: 480px) {
+  .floating-elements {
+    display: none;
+  }
+}
